@@ -26,7 +26,6 @@ contract APIWeather is ChainlinkClient {
      * Comes in format : consolidated_weather.0.min_temp / max_temp
      * e.g. 13.559999999999999
      * 15 decimal places
-
      */
     constructor(address _oracle, bytes32 _jobId, uint256 _fee, address _link) {
         if (_link == address(0)) {
@@ -44,7 +43,7 @@ contract APIWeather is ChainlinkClient {
      * Create a Chainlink request to retrieve API response, find the target
      * data, then multiply by 1000000000000000 (to remove decimal places from data).
      */
-    function requestVolumeData(string memory _url) public returns (bytes32 requestId) 
+    function requestWeatherData(string memory _url) public returns (bytes32 requestId) 
     {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
         
