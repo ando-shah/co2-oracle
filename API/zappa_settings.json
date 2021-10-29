@@ -1,0 +1,11 @@
+{
+    "dev": {
+        "app_function": "main.app",
+        "profile_name": null,
+        "project_name": "api",
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-8efnwvl1a",
+        "region": "us-west-2"
+
+    }
+}
