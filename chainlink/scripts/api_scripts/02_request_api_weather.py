@@ -23,5 +23,5 @@ def main():
 
     url =  base_url + woeid + "/"
 
-    request_tx = api_contract.requestVolumeData(url,{"from": account})
+    request_tx = api_contract.requestWeatherData(url,{"from": account})
     request_tx.wait(1)
