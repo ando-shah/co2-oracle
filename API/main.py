@@ -2,7 +2,7 @@ from flask import Flask, g
 import sqlite3
 
 app = Flask(__name__)
-
+app.url_map.strict_slashes = False
 
 # Database helper functions
 DATABASE = './output-table.db'
