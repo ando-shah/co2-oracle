@@ -21,6 +21,7 @@ This app is deployed on Heroku with gunicorn currently with the url https://gree
 Per the deployment specifications on heroku:
 
 Download and install the Heroku CLI 
+
 Mac: `brew tap heroku/brew && brew install heroku`
 
 Ubuntu: `sudo snap install --classic heroku`
