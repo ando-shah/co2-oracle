@@ -26,10 +26,14 @@ Ubuntu: `sudo snap install --classic heroku`
 Windows: https://devcenter.heroku.com/articles/heroku-cli
 
 Clone source code into repo (NOTICE: this is a git repository within a larger git repository, please clone to co2-oracle/API directory)
-`$ heroku git:clone -a greenfi-api`
-`$ cd greenfi-api`
+```
+$ heroku git:clone -a greenfi-api
+$ cd greenfi-api
+```
 
 Deploy changes
-`$ git add .`
-`$ git commit -am "make it better"`
-`$ git push heroku master`
+```
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
+```
