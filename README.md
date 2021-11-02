@@ -3,7 +3,7 @@
 There are two major components in this project:
 
 [Chainlink Readme](chainlink/README.md)
-[Flask Readme]
+[Flask Readme](API/README.md)
 
 ## License
 
