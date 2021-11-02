@@ -22,7 +22,9 @@ Per the deployment specifications on heroku:
 
 Download and install the Heroku CLI 
 Mac: `brew tap heroku/brew && brew install heroku`
+
 Ubuntu: `sudo snap install --classic heroku`
+
 Windows: https://devcenter.heroku.com/articles/heroku-cli
 
 Clone source code into repo (NOTICE: this is a git repository within a larger git repository, please clone to co2-oracle/API directory)
