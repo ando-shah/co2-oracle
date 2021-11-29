@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS output;
+
 CREATE TABLE output (
   parameter text,
   timestamp integer,
