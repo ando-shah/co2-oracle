@@ -3,10 +3,9 @@ import os
 import sqlite3
 import time
 import atexit
-#from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
+import scraper
 
-
-# app = Flask(__name__, instance_relative_config=True)
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
@@ -92,15 +91,24 @@ def combinedGlobal():
     g.cursor.execute('SELECT * FROM output WHERE parameter = "trend"')
     return parse_row(g.cursor)
 
+def scrape_job():
+    scraper.scrape()
 
-# sched = BackgroundScheduler(daemon = True)
-# sched.add_job(scraper, 'interval', seconds=10)
-# sched.start()
+
+sched = BackgroundScheduler(daemon=True)
+# sched.add_job(scrape_job, 'interval', minutes=2, max_instances=1)
+sched.add_job(scrape_job, 'interval', hours=24, max_instances=1)
+
+sched.start()
 
 # Shutdown your cron thread if the web process is stopped
-# atexit.register(lambda: sched.shutdown(wait=False))
+atexit.register(lambda: sched.shutdown(wait=False))
 
 # main driver function
 if __name__ == '__main__':
-    db = get_db()
-    app.run(use_reloader=False)
+    try:
+        app.run(debug=False, use_reloader=False)
+        
+    except(KeyboardInterrupt, SystemExit):
+        # Not strictly necessary if daemonic mode is enabled but should be done if possible
+        sched.shutdown()

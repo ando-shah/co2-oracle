@@ -9,6 +9,8 @@ import sys
 CO2_URL = 'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_trend_gl.csv'
 DATABASE = './output-table.db'
 
+def test():
+    print ("scrape test")
 
 def write_to_db(ts, s, t):
 
