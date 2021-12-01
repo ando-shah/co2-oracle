@@ -125,63 +125,29 @@ This mix provides a simple template for working with Chainlink Smart Contracts. 
 
 > NOTE: It's highly encouraged that you work with a local chain before testing on a testnet. You'll be a much faster developer!
 
-### Chainlink Price Feeds
+### Compile
 
-This will deploy a smart contract to kovan and then read you the latest price via [Chainlink Price Feeds](https://docs.chain.link/docs/get-the-latest-price).
+This will compile all the solidity code
 ```
-brownie run scripts/price_feed_scripts/01_deploy_price_consumer_v3.py --network kovan
-brownie run scripts/price_feed_scripts/02_read_price_feed.py --network kovan
-```
-Or, you can use [ENS](https://docs.chain.link/docs/ens)
-```
-brownie run scripts/price_feed_scripts/02_read_price_feed_with_ens.py --network kovan
+brownie compile
 ```
 
-Otherwise, you can fork mainnet and use that in a local ganache development environment.
-```bash
-brownie console --network mainnet-fork
->>> price_feeds = PriceFeedConsumer.deploy('0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419', {'from': accounts[0]})
-.
-.
->>> latest_price = price_feeds.getLatestPrice()
->>> latest_price
-59169208540
-```
 
-You can also use [ENS](https://docs.chain.link/docs/ens) to get prices. See the [ens price feed script](./scripts/price_feed_scripts/read_price_with_ens.py) for more information.
-
-### Chainlink VRF
-
-This will deploy a smart contract to kovan and get a Random number via [Chainlink VRF](https://docs.chain.link/docs/get-a-random-number).
-```
-brownie run scripts/vrf_scripts/01_deploy_vrf.py --network kovan
-brownie run scripts/vrf_scripts/02_request_randomness.py --network kovan
-brownie run scripts/vrf_scripts/03_read_random_number.py --network kovan
-```
-
-### Chainlink API Call
+### Chainlink CO2 API Call
 
 
 This will deploy a smart contract to kovan and then make an API call via [Chainlink API Call](https://docs.chain.link/docs/make-a-http-get-request).
 ```
-brownie run scripts/chainlink_api_scripts/01_deploy_api_consumer.py --network kovan
-brownie run scripts/chainlink_api_scripts/02_request_api.py --network kovan
-brownie run scripts/chainlink_api_scripts/03_read_data.py --network kovan
+brownie run scripts/co2_scripts/01_deploy_co2.py --network kovan
+brownie run scripts/co2_scripts/02_request_co2_data.py  --network kovan
+brownie run scripts/co2_scripts/03_read_co2_data.py --network kovan   
 ```
 
-### Chainlink Keeper Deployment
-
-
-This is just to show you how to deploy the Keepers, you can learn more about registering them in the [Chainlink Keeper](https://docs.chain.link/docs/chainlink-keepers/compatible-contracts/) documenation.
-```
-brownie run scripts/keeper_scripts/01_deploy_keeper_counter.py --network kovan
-brownie run scripts/keeper_scripts/02_check_upkeep.py --network kovan
-```
 
 
 ### Local Development
 
-For local development, you might want to deploy mocks. You can run the script to deploy mocks. Depending on your setup, it might make sense to *not* deploy mocks if you're looking to fork a mainnet. It all depends on what you're looking to do though. Right now, the scripts automatically deploy a mock so they can run.
+Since we're using Oracles, the local infrastructure does not *currently* exist to support this, so for now, this mode is unsupported
 
 ## Testing
 
@@ -224,6 +190,17 @@ or, for a fork:
 brownie networks add development binance-fork cmd=ganache-cli host=http://127.0.0.1 fork=https://bsc-dataseed1.binance.org accounts=10 mnemonic=brownie port=8545
 ```
 
+
+## Getting LINK tokens
+
+You will need LINK tokens in your metamask wallet to transact (even with the testnets). Dont worry, this can be achieved for free! To receive testnet Link tokens, go to your metamask wallet, and switch to the testnet of interest, say Kovan. Paste that address into:
+
+https://faucets.chain.link/kovan
+OR
+https://kovan.chain.link/
+
+
+
 ## Linting
 
 ```
@@ -253,10 +230,7 @@ To get started with Brownie:
 * Check out the [Chainlink documentation](https://docs.chain.link/docs) to get started from any level of smart contract engineering.
 * Check out the other [Brownie mixes](https://github.com/brownie-mix/) that can be used as a starting point for your own contracts. They also provide example code to help you get started.
 * ["Getting Started with Brownie"](https://medium.com/@iamdefinitelyahuman/getting-started-with-brownie-part-1-9b2181f4cb99) is a good tutorial to help you familiarize yourself with Brownie.
-* For more in-depth information, read the [Brownie documentation](https://eth-brownie.readthedocs.io/en/stable/).
-
-
-Any questions? Join our [Discord](https://discord.gg/2YHSAey)
+* For more in-depth information, read the [Brownie documentation](https://eth-brownie.readthedocs.io/en/stable/)
 
 ## License
 

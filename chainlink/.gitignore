@@ -2,6 +2,7 @@
 # chainlink-mix
 .vscode
 .env
+.env.example
 build/
 
 # Byte-compiled / optimized / DLL files
