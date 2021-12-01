@@ -1,9 +1,9 @@
 import csv
 import requests
-import pytz
 from datetime import datetime, timezone
 import sqlite3
 import sys
+import zoneinfo
 
 
 CO2_URL = 'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_trend_gl.csv'
@@ -60,7 +60,7 @@ def scrape():
         s = float(lastEntry[3])
         t = float(lastEntry[4])
 
-        tz_ca = pytz.timezone('US/Pacific')
+        tz_ca = zoneinfo.ZoneInfo("America/Los_Angeles")
 
         dt = datetime(int(lastEntry[0]), int(lastEntry[1]), int(lastEntry[2]), 0, 0, 0, tzinfo=tz_ca)
         print ("time : ", int(dt.timestamp()))

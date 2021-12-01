@@ -66,6 +66,12 @@ def initdb_command():
     seed_db()
     print('Seeded the database') 
 
+@app.cli.command('initscrape')
+def initscrape():
+    scraper.scrape()
+
+
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
@@ -95,20 +101,20 @@ def scrape_job():
     scraper.scrape()
 
 
+
 sched = BackgroundScheduler(daemon=True)
 # sched.add_job(scrape_job, 'interval', minutes=2, max_instances=1)
-sched.add_job(scrape_job, 'interval', hours=24, max_instances=1)
-
+sched.add_job(scrape_job, 'interval', minutes=10)
 sched.start()
 
+
+#Kick off an initial scrape
+# this is required for heroku because sqlite db is not persistent between sleep/awakes, and reverts to uploaded db!
+scrape_job() 
+
 # Shutdown your cron thread if the web process is stopped
-atexit.register(lambda: sched.shutdown(wait=False))
+#atexit.register(lambda: sched.shutdown(wait=False))
 
 # main driver function
 if __name__ == '__main__':
-    try:
-        app.run(debug=False, use_reloader=False)
-        
-    except(KeyboardInterrupt, SystemExit):
-        # Not strictly necessary if daemonic mode is enabled but should be done if possible
-        sched.shutdown()
+    app.run(debug=False, use_reloader=False)
