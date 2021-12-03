@@ -10,3 +10,4 @@ def main():
     else:
       print("Current CO2 concentration [parts per million]: ", api_contract.co2_ppm()/100)
       print ("Remaining CO2 budget [Gt-CO2] ", api_contract.remaining_co2_budget()/10000)
+      print ("Timestamp [Epoch]: ", api_contract.timestamp())
