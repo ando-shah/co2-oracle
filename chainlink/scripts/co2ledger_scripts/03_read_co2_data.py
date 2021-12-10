@@ -6,19 +6,6 @@ api_contract = APICO2Ledger[-1]
 account = get_account()
 
 
-def read_all():
-    count = api_contract.getEntityCount.call()
-    print ("Ledger Count: ", count)
-
-    for i in count:
-        key = api_contract.keyList(i)
-        print (f'Timestamp #{i}: {key}')
-        
-        t_budget, ppm, r_budget, owner = api_contract.getEntity.call(key,{"from": account},)
-
-        print(f'[Total budget]:{t_budget}|[Remaining Budget]:{r_budget}|[Current CO2 ppm]:{ppm}|[Requester ETH Address]:{owner}')
-
-
 def main():
 
     print("Reading data from {}".format(api_contract.address))

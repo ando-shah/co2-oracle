@@ -1,42 +1,5 @@
 # Brownie Mix for Chainlink Oracle
 
-> NOTE: This has been recently updated for better compatibility with local blockchains. Check out the scripts to learn more.
-
-
-<br/>
-<p align="center">
-<a href="https://chain.link" target="_blank">
-<img src="https://raw.githubusercontent.com/smartcontractkit/chainlink-mix/master/img/chainlink-brownie.png" width="225" alt="Chainlink Brownie logo">
-</a>
-</p>
-<br/>
-
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/smartcontractkit/chainlink-mix.svg)](http://isitmaintained.com/project/smartcontractkit/chainlink-mix "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/smartcontractkit/chainlink-mix.svg)](http://isitmaintained.com/project/smartcontractkit/chainlink-mix "Percentage of issues still open")
-
-This is a repo to work with and use Chainlink smart contracts in a python environment. If you're brand new to Chainlink, check out the beginner walkthroughs in remix to [learn the basics.](https://docs.chain.link/docs/beginners-tutorial)
-
-You can also check out the more advanced Chainlink tutorials there as well.
-
-- [chainlink-mix](#chainlink-mix)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Testnet Development](#testnet-development)
-  - [Local Development](#local-development)
-  - [Running Scripts and Deployment](#running-scripts-and-deployment)
-    - [Chainlink Price Feeds](#chainlink-price-feeds)
-    - [Chainlink VRF](#chainlink-vrf)
-    - [Chainlink API Call](#chainlink-api-call)
-    - [Chainlink Keeper Deployment](#chainlink-keeper-deployment)
-    - [Local Development](#local-development-1)
-  - [Testing](#testing)
-    - [To test development / local](#to-test-development--local)
-    - [To test mainnet-fork](#to-test-mainnet-fork)
-    - [To test a testnet](#to-test-a-testnet)
-  - [Adding additional Chains](#adding-additional-chains)
-  - [Linting](#linting)
-  - [Resources](#resources)
-  - [License](#license)
 
 ## Prerequisites
 
@@ -136,11 +99,17 @@ brownie compile
 ### Chainlink CO2 API Call
 
 
-This will deploy a smart contract to kovan and then make an API call via [Chainlink API Call](https://docs.chain.link/docs/make-a-http-get-request).
+This will deploy a smart contract to kovan and then make an API call via [Chainlink API Call](https://docs.chain.link/docs/make-a-http-get-request), to read the single CO2 concentration you requested
 ```
-brownie run scripts/co2_scripts/01_deploy_co2.py --network kovan
-brownie run scripts/co2_scripts/02_request_co2_data.py  --network kovan
-brownie run scripts/co2_scripts/03_read_co2_data.py --network kovan   
+brownie run scripts/co2ledger__scripts/01_deploy_co2.py --network kovan
+brownie run scripts/co2ledger__scripts/02_request_co2_data.py  --network kovan
+# Request the data
+brownie run scripts/co2ledger__scripts/03_read_co2_data.py --network kovan   
+```
+
+To read all the entries logged, use:
+```
+brownie run scripts/co2ledger_scripts/04_read_all.py --network kovan
 ```
 
 

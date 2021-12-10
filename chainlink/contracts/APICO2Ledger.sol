@@ -30,7 +30,7 @@ contract APICO2Ledger is ChainlinkClient {
     }
 
     //It's key is the block timestamp, temporarily it's the address
-    mapping (uint256 => ledgerStruct) public co2Ledger;
+    mapping (uint256 => ledgerStruct) private co2Ledger;
     //Array of keys -> TIMESTAMPs of requests
     uint256 [] public keyList;
 
