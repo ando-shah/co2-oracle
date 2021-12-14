@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from brownie import APICO2Ledger
 from scripts.helpful_scripts import get_account
+import datetime
 
 api_contract = APICO2Ledger[-1]
 account = get_account()
@@ -12,11 +13,13 @@ def read_all():
 
     for i in range(count):
         key = api_contract.keyList(i)
-        print (f'Entry#{i+1}: Timestamp: {key}')
+        ts = datetime.datetime.fromtimestamp(key)
+
+        print (f'Entry#{i+1} -> Timestamp: {ts}')
         
         t_budget, ppm, r_budget, owner = api_contract.getEntity.call(key,{"from": account},)
 
-        print(f'[Total budget:{t_budget/10000} GtCO2e]|[Remaining Budget:{r_budget/10000} GtCO2e]|[Current CO2 concentration]:{ppm/100} ppm]|[Requester ETH Address:{owner}]')
+        print(f'[Total budget:{t_budget/10000} GtCO2e]|[Remaining Budget:{r_budget/10000} GtCO2e]|[Current CO2 concentration:{ppm/100} ppm]|[Requester ETH Address:{owner}]')
 
 
 def main():
