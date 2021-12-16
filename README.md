@@ -1,5 +1,16 @@
 # Carbon Dioxide Oracle - CO2O
 
+## Abstract
+In order to prevent catastrophic destabilization of the planet’s climate system and to maintain the planet’s biosphere, human society must limit its greenhouse gas emissions before the global ‘carbon budget’ is exceeded. According to the Paris Agreement (PA), countries define their own contributions towards emissions and periodically revise these towards more ambitious targets, till such levels are achieved. Policymakers use climate policy instruments such as carbon taxes or offsets to create the incentives required, which require an accurate and consistent price for carbon. Today, carbon markets are highly fragmented and there is high variance in the prices set in different jurisdictions, ranging from less than $1 (in Mexico) to $119 (in Sweden) per ton of carbon dioxide. The reason for this large discrepancy is multidimensional and complex, but their effect is simple: an untrustworthy supply chain for one of the most important information goods in the world, carbon pricing.
+
+To this end, we have designed the decentralized infrastructure required to produce this pricing from diverse data-sources in realtime, an ongoing challenge in carbon pricing markets. Within this project we will develop the oracle infrastructure that can monitor, verify and report real-time climate variables from trusted sources, such as the global carbon dioxide concentration. Additionally, we will derive the carbon budget and immutably log both the outcomes (realtime co2 concentration and remaining budget) and the parameters that led to the outcome, rendering the whole supply chain transparent. This system will serve as a building block for a greater system that can derive carbon pricing in a similar manner.  
+
+The carbon prices produced themselves act as a canonical or shadow price, by which other markets and actors can implement cap-and-trade, carbon taxation, or internal pricing strategies.
+
+## Objectives
+
+This project was originally developed during a UC Berkeley class, [CS294-177:DeFi](https://berkeley-defi.github.io/f21), in the fall of 2021. It was carried out with guidance from [Open Earth Foundation](https://openearth.org/)
+
 This project's goals are:
 
 - Deliver realtime carbon dioxide (CO2) concentration data, aggregated from National Oceanic and Atmospheric Administration’s (NOAA) Global Monitoring Lab, to any smart contract on the Ethereum network
@@ -13,18 +24,18 @@ The software architcecture is as show below:
 ![Software Architecture](/images/CO2-OracleSystem-Diagram.png)
 
 
-There are two major components in this project:
+## Artifacts
 
-## CO2 API
+### CO2 API
 The de facto source of atmospheric carbon dioxide concentration is from the National Oceanic and Atmo- spheric Administration’s (NOAA) Global Monitoring Lab, which publishes greenhouse gas concentration readings from 87 stations around the world, at intervals ranging from hourly to monthly, with some unpredictable lag. Originally, we planned to create a model that would predict the realtime (hourly) outcome from the daily and weekly values, which would account for the seasonal nature of CO2 concentration change[^1], but we found that NOAA already publishes two sets of predicted values on a daily basis that model the global average CO2 concentration (’smoothed’), and control for the seasonal differences (’trend’). These were accurate and high frequency enough for our purposes. However NOAA does not provide an API for this data, but simply a text file download. To fill this gap, we created a simple CO2 server, built on Flask, that would scrape this data from NOAA on a daily basis, perform some data cleaning and store these values in a database. This data, along with it’s generated timestamp were exposed through an API that allows anyone to read the most recent CO2 concentration values (both smoothed and trend) along with an epoch timestamp. This API would enable this data to be brought on chain.
 
-### Implementation
+#### Implementation
 
 All implementation details for this Flask server can be found below:
 
 [API Readme](API/README.md)
 
-## Smart Contracts
+### Smart Contracts
 As specified earlier, the SCs have a dual function: to fetch the cost of carbon from the CO2 Oracle and derive the carbon budget, and create an immutable entry to the underlying blockchain with the timestamp, and all input parameters. This schema encapsulates all the constituents that led to this particular price, rendering the supply chain transparent. To fetch the realtime data from the CO2 Oracle, we used the request-response mechanism, as required by Chainlink’s hybrid smart contracts. They require two separate calls to the SC: the first specifying the API endpoint and JSON hierarchy, and a second to read the retrieved data. The second call is also used to compute the carbon budget on-chain. In order to immutably log this schema, we created a limited functionality CRUD database (without the update and delete functions), that allows for append as well as sequential and random reads. We adapted Rob Hitchen’s CRUD framework[^2] to use a private Mappings as the hash table, with the timestamp as the unique key, and all the input parameters and generated output within a struct, as the storage. In order to allow web3 clients to iterate over the keys and retrieve any element without loosening the security of the hash table, we add a public dynamic array to store the keys:
 ```
 mapping ( uint256 => ledgerStruct ) private co2Ledger ; uint256 [] public keyList ;
@@ -35,7 +46,7 @@ function getEntityCount () public returns ( uint entityCount ) function getEntit
 function getKeyAtIndex(uint index) public returns(uint256 key)
 ```
 
-### Carbon Budget Implementation
+#### Carbon Budget Implementation
 
 We need to convert the current atmospheric CO2 concentration in parts per million (ppm) to Gigatons of CO2; this done by the fomula:
 > 1ppm = 2.13 GTC = 7.81 GtCO2
