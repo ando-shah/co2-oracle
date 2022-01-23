@@ -58,3 +58,4 @@ git remote -v
 
 ## Current Issues
 - SQlite is not supported by Heroku. As a result, there is no persistence in the data stored in the DB. Needs to migrate to SQLAlchemy
+- Move to AWS?
