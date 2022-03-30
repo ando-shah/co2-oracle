@@ -9,7 +9,7 @@ The carbon prices produced themselves act as a canonical or shadow price, by whi
 
 ## Objectives
 
-This project was originally developed during a UC Berkeley class, [CS294-177:DeFi](https://berkeley-defi.github.io/f21), in the fall of 2021. It was carried out with guidance from [Open Earth Foundation](https://openearth.org/)
+This project was conceived during a UC Berkeley class, [CS294-177:DeFi](https://berkeley-defi.github.io/f21), in the fall of 2021. It is being carried out with guidance from [Open Earth Foundation](https://openearth.org/) and is being updated to integrate an IAM into the system in the Spring and Summer of 2022.
 
 This project's goals are:
 
@@ -17,6 +17,9 @@ This project's goals are:
 - Compute the remaining carbon budget from this data point
 - Immutably log the inputs and outputs that led to this outcome to an on-chain database
 - Allow any web3 client to query this database
+
+Additionally
+- Be the building blocks for generating the Social Cost of Carbon via an Integrated Assessment Model, like FUND.
 
 This in effect acts as a framework for illuminating carbon pricing supply chains. The next step is to extend this framework to do carbon pricing and logging as well. The longer term goals of this project are to enable open access carbon pricing to anyone (web or web3 clients), with a corresponding log to a public blockchain, and subsequent retrieval.
 
@@ -99,6 +102,10 @@ The Brownie code for this implementation and details to recreate it can be found
 ## License
 
 This project is licensed under the [MIT license](LICENSE).
+
+## Funding
+
+This project is supported by a grant from the Haas School of Business, UC Berkeley, with funding from Ripple's [University Blockchain Research Initiative](https://ripple.com/ubri) 
 
 [^1]: This seasonal variation is because during the northern hemisphere summer, the vegetation around the equator and in the northern hemisphere absorb large amounts of CO2 during photosynthesis, and during the northern hemisphere winter, this activity shifts southwards where there are relatively fewer photosynthesizing agents.
 [^2]: Rob Hitchens. Solidity CRUD part 1 URL: https://medium.com/robhitchens/solidity-crud-part-1-824ffa69509a.
