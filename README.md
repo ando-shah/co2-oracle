@@ -105,7 +105,7 @@ This project is licensed under the [MIT license](LICENSE).
 
 ## Funding
 
-This project is supported by a grant from the Haas School of Business, UC Berkeley, with funding from Ripple's [University Blockchain Research Initiative](https://ripple.com/ubri) 
+This project is supported by a grant from the Haas School of Business, UC Berkeley, with funding from Ripple's [University Blockchain Research Initiative](https://ripple.com/ubri). It is being advised by Prof. John Chuang at UC Berkeley.
 
 [^1]: This seasonal variation is because during the northern hemisphere summer, the vegetation around the equator and in the northern hemisphere absorb large amounts of CO2 during photosynthesis, and during the northern hemisphere winter, this activity shifts southwards where there are relatively fewer photosynthesizing agents.
 [^2]: Rob Hitchens. Solidity CRUD part 1 URL: https://medium.com/robhitchens/solidity-crud-part-1-824ffa69509a.
