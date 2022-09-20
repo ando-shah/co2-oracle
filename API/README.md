@@ -24,7 +24,8 @@ It is encouraged to run this within it's own virtual environment
 
 
 ### Herku Deployment
-This app is deployed on Heroku with gunicorn currently with the url https://greenfi-api.herokuapp.com/
+This app is deployed on Heroku with gunicorn currently at [this URL](https://co2ppm.herokuapp.com/trend).
+
 Per the deployment specifications on heroku:
 
 Download and install the Heroku CLI 
